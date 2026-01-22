@@ -27,7 +27,7 @@ def list_db_tables(state: Annotated[SoqlState, InjectedState]):
     }
 
 @tool
-def get_schema_of_table(table_names: list[str], state: SoqlState):
+def get_schema_of_table(table_names: list[str], state: Annotated[SoqlState, InjectedState]):
     access_token, instance_url = get_salesforce_token()
     headers = {"Authorization": f"Bearer {access_token}"}
 
@@ -56,7 +56,7 @@ def get_schema_of_table(table_names: list[str], state: SoqlState):
 
 
 @tool
-def soql_query_generator_and_executor(user_query: str, state: SoqlState):
+def soql_query_generator_and_executor(user_query: str, state: Annotated[SoqlState, InjectedState]):
     from langchain_core.prompts import ChatPromptTemplate
 
     prompt = ChatPromptTemplate.from_messages([
